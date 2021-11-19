@@ -7,7 +7,7 @@ import org.junit.Test;
  * Tests for Voter objects.
  *
  * @author  Dr. Jody Paul
- * @version 20191006
+ * @version 20211117
  */
 public class VoterTest {
     /**
