@@ -1,33 +1,34 @@
 package swdmt.redistricting;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 /**
  * Tests for Voter objects.
  *
  * @author  Dr. Jody Paul
- * @version 20211119
+ * @version 20211120
  */
 public class VoterTest {
     /**
-    * Voter's party affiliation should match Party.None when passed Party.None
+    * Voter's party affiliation should match Party. None when passed Party.None
     */
     @Test
     public void affiliationAttributeSpecifiedTest() {
         Voter voter1 = new Voter(Party.NONE, new Location(0, 0));
-        assertEquals(voter1.affiliation(), Party.NONE);
+        assertThat(voter1.affiliation(), is(Party.NONE));
     }
 
     /**
-    * Voter's party affiliation should be Party.None when passed null
+    * Voter's party affiliation should be Party. None when passed null
     */
     @Test
     public void affiliationAttributeNullTest() {
         Voter voter2 = new Voter(null,
                                  new Location(Integer.MIN_VALUE,
                                               Integer.MAX_VALUE));
-        assertEquals(voter2.affiliation(), Party.NONE);
+        assertThat(voter2.affiliation(), is(Party.NONE));
     }
 
     /**
@@ -50,9 +51,9 @@ public class VoterTest {
                                  new Location(Integer.MIN_VALUE,
                                               Integer.MAX_VALUE));
         assertAll("locations",
-            () -> assertEquals(voter1.location(), new Location(0, 0)),
-            () -> assertEquals(voter2.location().xCoordinate(), Integer.MIN_VALUE),
-            () -> assertEquals(voter2.location().yCoordinate(), Integer.MAX_VALUE)
+            () -> assertThat(voter1.location(), is(new Location(0, 0))),
+            () -> assertThat(voter2.location().xCoordinate(), is(Integer.MIN_VALUE)),
+            () -> assertThat(voter2.location().yCoordinate(), is(Integer.MAX_VALUE))
         );
     }
 }
