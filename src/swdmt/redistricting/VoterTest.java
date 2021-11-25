@@ -1,7 +1,6 @@
 package swdmt.redistricting;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 /**
@@ -12,7 +11,8 @@ import org.junit.jupiter.api.Test;
  */
 public class VoterTest {
     /**
-    * Voter's party affiliation should match Party. None when passed Party.None
+    * Test case for affliliation attributes.
+    * When passed 'Party.NONE', the same should be returned.
     */
     @Test
     public void affiliationAttributeSpecifiedTest() {
@@ -21,7 +21,8 @@ public class VoterTest {
     }
 
     /**
-    * Voter's party affiliation should be Party. None when passed null
+    * Test case for affliliation attributes when passed null.
+    * When passed null, 'Party.NONE' should be returned.
     */
     @Test
     public void affiliationAttributeNullTest() {
@@ -32,7 +33,9 @@ public class VoterTest {
     }
 
     /**
-    * When passed a null location should throw an illegal argument exception
+    * Test case for invalid locations.
+    * When a new voter is created with no location,
+    * throws IllegalArgumentException
     */
     @Test
     public void invalidLocationTest() throws IllegalArgumentException {
@@ -42,18 +45,17 @@ public class VoterTest {
     }
 
     /**
-    * When passed various location attributes they match expected values
+    * Test case for various location attributes.
+    * When created with various locations, the passed value should be returned
     */
     @Test
     public void locationAttributeTest() {
         Voter voter1 = new Voter(Party.NONE, new Location(0, 0));
+        assertThat(voter1.location(), is(new Location(0, 0)));
         Voter voter2 = new Voter(null,
                                  new Location(Integer.MIN_VALUE,
                                               Integer.MAX_VALUE));
-        assertAll("locations",
-            () -> assertThat(voter1.location(), is(new Location(0, 0))),
-            () -> assertThat(voter2.location().xCoordinate(), is(Integer.MIN_VALUE)),
-            () -> assertThat(voter2.location().yCoordinate(), is(Integer.MAX_VALUE))
-        );
+        assertThat(voter2.location().xCoordinate(), is(Integer.MIN_VALUE));
+        assertThat(voter2.location().yCoordinate(), is(Integer.MAX_VALUE));
     }
 }
